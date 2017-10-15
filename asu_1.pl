@@ -6,15 +6,12 @@ use warnings;
 use CGI qw(:standard);				# Include standard HTML and CGI functions
 use CGI::Carp qw(fatalsToBrowser);      	# Send error messages to browser
 
-
 	&printheader;
 	if (param()) {
 		&display;
 	}
 	&printform;
 	&printtail;
-
-
 
 
 sub printheader {
@@ -26,15 +23,11 @@ sub printheader {
 }
 
 
-
-
 sub printtail {
 
 	print ("mkowalc1 | ASU | 2017"),
   end_html();
 }
-
-
 
 
 sub printform {
@@ -47,16 +40,12 @@ sub printform {
    	scrolling_list(-name=>'username',
                        -values=>[getusers()],
                        -size=>7,
-		       		 		-multiple=>'false'),
-
+		       -multiple=>'false'),
 
 	p,
 	submit("Get processes"),
-
-  end_form();
+	end_form();
 }
-
-
 
 
 sub display {
@@ -66,13 +55,8 @@ sub display {
 		push @values, param($key);
 	}
 	print h4("processes of $values[0]...");
-
 	print "<pre>";
-
-	system("ps -U $values[0]");
-
-
-
+	 system("ps -U $values[0]");
 	print "</pre>";
 	hr;
 }
@@ -83,7 +67,7 @@ sub getusers {
 	open PASSWD, "/etc/passwd";
 		while(<PASSWD>) {
     			my @f = split /:/;
-					push @unames, $f[0];
+			push @unames, $f[0];
 		}
 	return @unames;
 }
